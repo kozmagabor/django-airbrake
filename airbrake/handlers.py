@@ -65,6 +65,8 @@ class AirbrakeHandler(logging.Handler):
                 match = resolve(request.path_info)
             except Http404:
                 match = None
+            except ImportError:
+                match = None
 
             request_xml = SubElement(xml, 'request')
             SubElement(request_xml, 'url').text = request.build_absolute_uri()
